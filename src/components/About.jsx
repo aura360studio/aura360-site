@@ -1,4 +1,12 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import clientLogo1 from '../assets/Clients logo/1 kido.webp';
+import clientLogo2 from '../assets/Clients logo/2 sky land brand.webp';
+import clientLogo3 from '../assets/Clients logo/3 bizen.webp';
+import clientLogo4 from '../assets/Clients logo/4 dd.webp';
+import clientLogo5 from '../assets/Clients logo/5 Kreedo-logo.webp';
+import clientLogo6 from '../assets/Clients logo/6 Kiya-logo.webp';
+import clientLogo7 from '../assets/Clients logo/ZORKO-LOGO.webp';
 
 const sectionReveal = {
   hidden: { opacity: 0, y: 40 },
@@ -37,6 +45,37 @@ export default function About() {
       description: 'Every project designed to influence perception and performance.',
     },
   ];
+  const clients = [
+    { name: 'Kido', logo: clientLogo1 },
+    { name: 'Sky Land Brand', logo: clientLogo2 },
+    { name: 'Bizen', logo: clientLogo3 },
+    { name: 'DD', logo: clientLogo4 },
+    { name: 'Kreedo', logo: clientLogo5 },
+    { name: 'Kiya', logo: clientLogo6 },
+    { name: 'Zorko', logo: clientLogo7 },
+  ];
+  const [clientIndex, setClientIndex] = useState(0);
+  const [disableClientTransition, setDisableClientTransition] = useState(false);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setClientIndex((current) => current + 1);
+    }, 5800);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  const handleClientsTransitionEnd = () => {
+    if (clientIndex < clients.length) return;
+
+    setDisableClientTransition(true);
+    setClientIndex(0);
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        setDisableClientTransition(false);
+      });
+    });
+  };
 
   return (
     <motion.section
@@ -65,6 +104,26 @@ export default function About() {
               <br />
               Every project is built to perform.
             </p>
+
+            <div className='about-clients' aria-label='Selected clients'>
+              <p className='about-clients-label'>Selected Clients</p>
+              <div className='about-clients-marquee'>
+                <div
+                  className='about-clients-track'
+                  onTransitionEnd={handleClientsTransitionEnd}
+                  style={{
+                    transform: `translateX(calc(-${clientIndex} * (var(--about-client-card-width) + var(--about-client-gap))))`,
+                    transition: disableClientTransition ? 'none' : undefined,
+                  }}
+                >
+                  {[...clients, ...clients].map((client, index) => (
+                    <article className='about-client-card' key={`${client.name}-${index}`}>
+                      <img src={client.logo} alt={client.name} className='about-client-logo' />
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </div>
           </motion.div>
 
           <motion.aside className='about-authority' aria-label='Credibility highlights' variants={itemReveal} custom={1}>

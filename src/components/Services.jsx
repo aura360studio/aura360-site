@@ -54,8 +54,9 @@ Every frame is designed to elevate perceived value and strengthen brand authorit
 By revealing every angle and detail, we reduce hesitation and increase engagement across digital platforms.
 Designed for brands that want transparency, depth, and distinction.`,
     cta: 'Explore 360 Photography',
-    href: '#contact',
+    href: 'https://gothru.co/port/oszrazlAsS',
     featured: true,
+    external: true,
   },
   {
     title: 'Walkthrough and Visual Experience',
@@ -91,7 +92,12 @@ export default function Services() {
                 <h3>{service.title}</h3>
                 <p className='service-positioning'>{service.positioning}</p>
                 <p>{service.text}</p>
-                <a href={service.href} className='service-card-cta'>
+                <a
+                  href={service.href}
+                  className='service-card-cta'
+                  target={service.external ? '_blank' : undefined}
+                  rel={service.external ? 'noreferrer' : undefined}
+                >
                   <span>{service.cta}</span>
                   <span className='service-cta-arrow' aria-hidden='true'>-&gt;</span>
                 </a>

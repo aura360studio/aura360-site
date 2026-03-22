@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@lottiefiles/dotlottie-react": "^0.17.12",
     "@lottiefiles/react-lottie-player": "^3.6.0",
     "bootstrap": "^5.3.8",
     "framer-motion": "^12.34.3",
+    "pannellum": "^2.5.7",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-router-dom": "^7.9.4"

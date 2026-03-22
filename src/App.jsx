@@ -7,6 +7,8 @@ import {
   Services,
   Additional,
   Contact,
+  LabsPage,
+  ShowcasePage,
 } from './components';
 import { initSmoothScroll } from './utils/smoothScroll';
 
@@ -41,10 +43,30 @@ function OnePageLayout() {
   );
 }
 
+function LabsLayout() {
+  return (
+    <>
+      <Header />
+      <LabsPage />
+    </>
+  );
+}
+
+function ShowcaseLayout() {
+  return (
+    <>
+      <Header />
+      <ShowcasePage />
+    </>
+  );
+}
+
 export default function App() {
   return (
     <Routes>
       <Route path='/' element={<OnePageLayout />} />
+      <Route path='/labs' element={<LabsLayout />} />
+      <Route path='/showcase' element={<ShowcaseLayout />} />
       <Route path='*' element={<Navigate to='/' replace />} />
     </Routes>
   );

@@ -82,49 +82,49 @@ export default function Hero() {
         '--spotlight-y': `${y}px`,
       }}
     >
-      <div className='hero-spotlight' />
-      <div
-        ref={heroContentRef}
-        className={`container glass hero-content ${!interactionDisabled ? 'hero-content-base' : ''}`}
-      >
-        <p className='eyebrow'>Aura 360 Studio</p>
-        <h1>Your Brand Deserves to Be Seen.</h1>
-        <p className='hero-copy'>
-          We design visibility.
-          <br />
-          <br />
-          Through crafted visuals, motion, and immersive storytelling, we help brands stand out with clarity and
-          intent.
-        </p>
-        <a href='#contact' className='btn-accent-glow hero-cta'>
-          Start Your Project
-          <span className='chip-pill'>-&gt;</span>
-        </a>
-      </div>
+        <div className='hero-spotlight' />
+        <div
+          ref={heroContentRef}
+          className={`container glass hero-content ${!interactionDisabled ? 'hero-content-base' : ''}`}
+        >
+          <p className='eyebrow'>Aura 360 Studio</p>
+          <h1>Your Brand Deserves to Be Seen.</h1>
+          <p className='hero-copy'>
+            We design visibility.
+            <br />
+            <br />
+            Through crafted visuals, motion, and immersive storytelling, we help brands stand out with clarity and
+            intent.
+          </p>
+          <a href='#contact' className='btn-accent-glow hero-cta'>
+            Start Your Project
+            <span className='chip-pill'>-&gt;</span>
+          </a>
+        </div>
 
-      {!interactionDisabled ? (
-        <>
-          <div className='hero-blur-overlay' aria-hidden='true'>
-            <div className='container glass hero-content hero-content-blur'>
-              <p className='eyebrow'>Aura 360 Studio</p>
-              <h1>Your Brand Deserves to Be Seen.</h1>
-              <p className='hero-copy'>
-                We design visibility.
-                <br />
-                <br />
-                Through crafted visuals, motion, and immersive storytelling, we help brands stand out with clarity and
-                intent.
-              </p>
-              <a href='#contact' className='btn-accent-glow hero-cta'>
-                Start Your Project
-                <span className='chip-pill'>-&gt;</span>
-              </a>
+        {!interactionDisabled ? (
+          <>
+            <div className='hero-blur-overlay' aria-hidden='true'>
+              <div className='container glass hero-content hero-content-blur'>
+                <p className='eyebrow'>Aura 360 Studio</p>
+                <h1>Your Brand Deserves to Be Seen.</h1>
+                <p className='hero-copy'>
+                  We design visibility.
+                  <br />
+                  <br />
+                  Through crafted visuals, motion, and immersive storytelling, we help brands stand out with clarity and
+                  intent.
+                </p>
+                <a href='#contact' className='btn-accent-glow hero-cta'>
+                  Start Your Project
+                  <span className='chip-pill'>-&gt;</span>
+                </a>
+              </div>
             </div>
-          </div>
 
-          <div className='hero-cursor-glow' aria-hidden='true' />
-        </>
-      ) : null}
+            <div className='hero-cursor-glow' aria-hidden='true' />
+          </>
+        ) : null}
     </section>
   );
 }
