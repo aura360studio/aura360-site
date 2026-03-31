@@ -6,6 +6,18 @@
     <meta name="description" content="Aura 360 Studio one-page website" />
     <link rel="icon" href="/src/assets/favicon.ico" />
     <title>Aura 360 Studio</title>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var redirectPath = params.get('p');
+        if (!redirectPath) return;
+
+        params.delete('p');
+        var nextSearch = params.toString();
+        var nextUrl = redirectPath + (nextSearch ? (redirectPath.indexOf('?') === -1 ? '?' : '&') + nextSearch : '');
+        window.history.replaceState(null, '', nextUrl);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

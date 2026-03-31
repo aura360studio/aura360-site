@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Aura 360 Studio</title>
+    <script>
+      (function () {
+        var location = window.location;
+        var target = location.pathname + location.search + location.hash;
+        var redirectUrl =
+          location.protocol +
+          '//' +
+          location.host +
+          '/?p=' +
+          encodeURIComponent(target);
+
+        window.location.replace(redirectUrl);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
