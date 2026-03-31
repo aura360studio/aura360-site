@@ -471,7 +471,7 @@ p {
 
 .showcase-clients-header {
   width: 100%;
-  margin: 0 0 1rem;
+  margin: 0 0 0.75rem;
 }
 
 .showcase-clients-header h2 {
@@ -483,7 +483,7 @@ p {
 
 .showcase-about-hook-card {
   width: min(435px, calc(100% - 2rem));
-  margin: 7.5rem 6.5rem auto auto;
+  margin: 5.5rem 6.5rem auto auto;
   padding: clamp(1.05rem, 1.9vw, 1.6rem);
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.7);
@@ -849,6 +849,10 @@ p {
   background: #efede8;
 }
 
+.showcase-about-panel {
+  min-height: max(100vh, 860px);
+}
+
 .showcase-section-image {
   width: 100%;
   height: 100%;
@@ -888,7 +892,10 @@ p {
 .showcase-clients-content {
   justify-content: flex-end;
   z-index: 1;
-  gap: 1.4rem;
+  gap: 1.15rem;
+  padding-top: clamp(2rem, 3vw, 3rem);
+  padding-bottom: clamp(3rem, 5vw, 4.25rem);
+  box-sizing: border-box;
 }
 
 .showcase-contact-overlay {
