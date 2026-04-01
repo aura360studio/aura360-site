@@ -23,12 +23,27 @@ const showcaseMenuItems = [
   { id: 'additional', label: 'Scope', href: '#additional' },
   { id: 'contact', label: 'Contact', href: '#contact' },
 ];
+const serviceSequence = [
+  { slug: 'ai-powered-ads', label: 'AI-Powered Ads', anchor: '#ai-powered-ads' },
+  { slug: 'product-photography', label: 'Product Photography', path: '/services/product-photography' },
+  { slug: '360-photography', label: '360 Photography', anchor: '#360-photography' },
+  { slug: 'visual-experience', label: 'Visual Experience', anchor: '#visual-experience' },
+];
 
 export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
   const isLabsPage = location.pathname === '/labs';
   const isShowcasePage = location.pathname === '/showcase';
+  const isServicePage = location.pathname.startsWith('/services/');
+  const isShowcaseHeaderPage = isShowcasePage || isServicePage;
+  const sourceMode = searchParams.get('mode') === 'classic' ? 'classic' : 'showcase';
+  const currentServiceSlug = location.pathname.replace('/services/', '') || 'product-photography';
+  const servicePageLabel = location.pathname === '/services/product-photography' ? 'Product Photography' : 'Service Page';
+  const currentServiceIndex = serviceSequence.findIndex((item) => item.slug === currentServiceSlug);
+  const previousService = currentServiceIndex > 0 ? serviceSequence[currentServiceIndex - 1] : null;
+  const nextService = currentServiceIndex >= 0 && currentServiceIndex < serviceSequence.length - 1 ? serviceSequence[currentServiceIndex + 1] : null;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState('home');
   const [isShowcaseHeaderHidden, setIsShowcaseHeaderHidden] = useState(false);
@@ -76,7 +91,7 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    if (!isShowcasePage) {
+    if (!isShowcaseHeaderPage) {
       setIsShowcaseHeaderHidden(false);
       return undefined;
     }
@@ -100,10 +115,25 @@ export default function Header() {
 
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, [isMenuOpen, isShowcasePage]);
+  }, [isMenuOpen, isShowcaseHeaderPage]);
 
   const handleNavClick = () => {
     setIsMenuOpen(false);
+  };
+
+  const buildModeHref = (mode, hash = '#home') => (mode === 'classic' ? `/${hash}` : `/showcase${hash}`);
+  const buildServiceDestination = (service) => {
+    if (!service) return '#';
+    if (service.path) {
+      return `${service.path}?mode=${sourceMode}`;
+    }
+
+    return buildModeHref(sourceMode, service.anchor || '#services');
+  };
+
+  const handleServiceHomeClick = (event) => {
+    event.preventDefault();
+    navigate(buildModeHref(sourceMode, '#home'));
   };
 
   const scrollToSection = (sectionId) => {
@@ -149,8 +179,47 @@ export default function Header() {
   };
 
   return (
-    <header className={`header-layer ${isShowcasePage && isShowcaseHeaderHidden ? 'showcase-header-hidden' : ''}`}>
-      {isShowcasePage ? (
+    <header className={`header-layer ${isShowcaseHeaderPage && isShowcaseHeaderHidden ? 'showcase-header-hidden' : ''}`}>
+      {isServicePage ? (
+        <div className='service-header-bar'>
+          <div className='service-header-shell'>
+            <Link
+              to={buildModeHref(sourceMode, '#home')}
+              className='service-header-close'
+              aria-label={`Close and return to ${sourceMode} mode`}
+              onClick={handleServiceHomeClick}
+            >
+              <span className='showcase-close-mark' aria-hidden='true'>
+                <span />
+                <span />
+              </span>
+            </Link>
+
+            <Link to={buildModeHref(sourceMode, '#home')} className='service-header-title' onClick={handleServiceHomeClick}>
+              {servicePageLabel}
+            </Link>
+
+            <div className='service-header-pager' aria-label='Service navigation'>
+              <Link
+                to={buildServiceDestination(previousService)}
+                className={`service-header-nav ${previousService ? '' : 'is-disabled'}`}
+                aria-disabled={previousService ? undefined : 'true'}
+                tabIndex={previousService ? undefined : -1}
+              >
+                <span aria-hidden='true'>←</span>
+              </Link>
+              <Link
+                to={buildServiceDestination(nextService)}
+                className={`service-header-nav ${nextService ? '' : 'is-disabled'}`}
+                aria-disabled={nextService ? undefined : 'true'}
+                tabIndex={nextService ? undefined : -1}
+              >
+                <span aria-hidden='true'>→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      ) : isShowcaseHeaderPage ? (
         <>
           <div
             id='showcase-menu-panel'
@@ -181,11 +250,7 @@ export default function Header() {
                   )}
                 </button>
 
-                <Link
-                  to='/showcase#home'
-                  className='showcase-wordmark showcase-wordmark-static'
-                  onClick={handleShowcaseHomeClick}
-                >
+                <Link to='/showcase#home' className='showcase-wordmark showcase-wordmark-static' onClick={handleNavClick}>
                   <span>Aura 360 Studio</span>
                 </Link>
 
@@ -193,7 +258,7 @@ export default function Header() {
                   to='/showcase#home'
                   className='showcase-brand-mark'
                   aria-label='Go to Aura 360 Studio showcase home'
-                  onClick={handleShowcaseHomeClick}
+                  onClick={handleNavClick}
                 >
                   <img src={faviconLens} alt='' className='showcase-brand-mark-image' />
                 </Link>
@@ -272,7 +337,7 @@ export default function Header() {
         <img src={logoWhite} alt='Aura 360 Studio' className='logo-dock-image' />
       </Link>
 
-      {!isLabsPage && !isShowcasePage ? (
+      {!isLabsPage && !isShowcasePage && !isServicePage ? (
         <nav className='nav-pill glass' aria-label='Primary navigation'>
           {navItems.map((item) => (
             <a
@@ -295,12 +360,19 @@ export default function Header() {
           </Link>
           <span className='nav-link active'>Aura Labs</span>
         </nav>
-      ) : (
+      ) : isShowcasePage ? (
         <nav className='nav-pill glass nav-pill-secondary' aria-label='Page navigation'>
           <Link to='/' className='nav-link'>
             Back to Home
           </Link>
           <span className='nav-link active'>Mode 02</span>
+        </nav>
+      ) : (
+        <nav className='nav-pill glass nav-pill-secondary' aria-label='Page navigation'>
+          <Link to='/showcase' className='nav-link'>
+            Back to Showcase
+          </Link>
+          <span className='nav-link active'>{servicePageLabel}</span>
         </nav>
       )}
 
@@ -362,7 +434,7 @@ export default function Header() {
         className={`mobile-menu glass ${isMenuOpen ? 'open' : ''}`}
         aria-label='Mobile navigation'
       >
-        {isLabsPage || isShowcasePage ? (
+        {isLabsPage || isShowcasePage || isServicePage ? (
           <>
             <Link
               to={isShowcasePage ? '/' : '/showcase'}
@@ -376,9 +448,9 @@ export default function Header() {
             </a>
           </>
         ) : null}
-        {isLabsPage || isShowcasePage ? (
-          <Link to='/' className='mobile-nav-link' onClick={handleNavClick}>
-            Back to Home
+        {isLabsPage || isShowcasePage || isServicePage ? (
+          <Link to={isServicePage ? '/showcase' : '/'} className='mobile-nav-link' onClick={handleNavClick}>
+            {isServicePage ? 'Back to Showcase' : 'Back to Home'}
           </Link>
         ) : (
           navItems.map((item) => (

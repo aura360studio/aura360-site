@@ -68,6 +68,7 @@ export const showcaseClients = [
 
 export const showcaseHighlights = [
   {
+    id: 'product-photography',
     eyebrow: 'Product Photography',
     title: 'We craft product imagery that sells.',
     copy:
@@ -75,6 +76,7 @@ export const showcaseHighlights = [
     image: productFeatureImage,
   },
   {
+    id: 'ai-powered-ads',
     eyebrow: 'Ads, now AI-powered',
     title: 'We craft AI-powered ads that attract attention.',
     copy:
@@ -84,8 +86,9 @@ export const showcaseHighlights = [
 ];
 
 export const showcaseMediaBands = [
-  { title: 'Creative powered by insight and precision', video: luxuryVodkaVideo, seamlessLoop: true },
+  { id: 'vodka-demo', title: 'Creative powered by insight and precision', video: luxuryVodkaVideo, seamlessLoop: true },
   {
+    id: '360-photography',
     title: 'Secondary feature frame with room for motion or copy',
     panorama: skyInsidePanorama,
     card: {
@@ -97,6 +100,7 @@ export const showcaseMediaBands = [
     },
   },
   {
+    id: 'visual-experience',
     title: 'Third feature image ready for replacement content',
     video: visualExperienceVideo,
     mobileVideo: visualExperienceVideoMobile,

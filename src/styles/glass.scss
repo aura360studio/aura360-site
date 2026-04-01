@@ -23,6 +23,7 @@
 .mode-switch,
 .labs-launch,
 .showcase-menu-panel,
+.service-header-bar,
 .menu-toggle,
 .mobile-menu {
   pointer-events: auto;
@@ -128,6 +129,84 @@
   height: 22px;
   display: block;
   object-fit: contain;
+}
+
+.service-header-bar {
+  display: flex;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+  will-change: transform;
+}
+
+.service-header-shell {
+  width: min(480px, calc(100vw - 2rem));
+  height: 42px;
+  padding: 0 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: rgba(246, 246, 244, 0.92);
+  box-shadow: 0 18px 34px rgba(65, 71, 76, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: grid;
+  grid-template-columns: 38px 1fr 56px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.service-header-close,
+.service-header-nav {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: #171717;
+  text-decoration: none;
+  transition: background-color 0.18s ease, transform 0.18s ease, opacity 0.18s ease;
+}
+
+.service-header-close:hover,
+.service-header-close:focus-visible,
+.service-header-nav:hover,
+.service-header-nav:focus-visible {
+  background: rgba(17, 17, 17, 0.06);
+  transform: translateY(-1px);
+}
+
+.service-header-title {
+  justify-self: center;
+  color: #111;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.service-header-pager {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.service-header-nav {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.service-header-nav.is-disabled {
+  opacity: 0.34;
+  pointer-events: none;
+}
+
+.showcase-header-hidden .service-header-bar {
+  opacity: 0;
+  transform: translateY(calc(-100% - 1.5rem));
 }
 
 .showcase-menu-panel {
@@ -849,6 +928,26 @@
 @media (max-width: 767px) {
   .showcase-side-control {
     display: none;
+  }
+
+  .service-header-shell {
+    width: calc(100vw - 1rem);
+    height: 42px;
+    min-height: 42px;
+    padding: 0 0.6rem;
+    border-radius: 12px;
+    grid-template-columns: 34px 1fr 52px;
+  }
+
+  .service-header-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+  }
+
+  .service-header-close,
+  .service-header-nav {
+    width: 28px;
+    height: 28px;
   }
 
   .showcase-wordmark span {

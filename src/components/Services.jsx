@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const sectionReveal = {
   hidden: { opacity: 0, y: 40 },
@@ -30,6 +31,7 @@ const itemReveal = {
 
 const services = [
   {
+    slug: 'ai-powered-ads',
     title: 'AI-Powered Ads',
     positioning: 'Creativity amplified by intelligence.',
     text: `We combine data-driven insights with high-impact visuals to craft adaptive campaigns that reach the right audience at the right moment.
@@ -39,15 +41,17 @@ Smarter targeting. Sharper execution. Measurable performance.`,
     featured: true,
   },
   {
+    slug: 'product-photography',
     title: 'Product Photography',
     positioning: 'Precision. Presence. Performance.',
     text: `We craft product imagery that does more than showcase - it sells.
 Through controlled lighting, refined composition, and meticulous detail, we position your products to command attention and drive conversion.
 Every frame is designed to elevate perceived value and strengthen brand authority.`,
     cta: 'Explore Product Photography',
-    href: '#contact',
+    href: '/services/product-photography',
   },
   {
+    slug: '360-photography',
     title: '360 Photography',
     positioning: 'Immersion builds trust.',
     text: `We create interactive 360 visuals that allow customers to explore with confidence.
@@ -59,6 +63,7 @@ Designed for brands that want transparency, depth, and distinction.`,
     external: true,
   },
   {
+    slug: 'visual-experience',
     title: 'Walkthrough and Visual Experience',
     positioning: 'Movement with purpose.',
     text: `We produce cinematic walkthroughs that transform environments into compelling visual narratives.
@@ -86,21 +91,35 @@ export default function Services() {
             {services.map((service) => (
               <motion.article
                 key={service.title}
+                id={service.slug}
                 className={`service-card glass ${service.featured ? 'service-card-featured' : ''}`}
                 variants={itemReveal}
               >
                 <h3>{service.title}</h3>
                 <p className='service-positioning'>{service.positioning}</p>
                 <p>{service.text}</p>
-                <a
-                  href={service.href}
-                  className='service-card-cta'
-                  target={service.external ? '_blank' : undefined}
-                  rel={service.external ? 'noreferrer' : undefined}
-                >
-                  <span>{service.cta}</span>
-                  <span className='service-cta-arrow' aria-hidden='true'>-&gt;</span>
-                </a>
+                {service.external ? (
+                  <a href={service.href} className='service-card-cta' target='_blank' rel='noreferrer'>
+                    <span>{service.cta}</span>
+                    <span className='service-cta-arrow' aria-hidden='true'>
+                      -&gt;
+                    </span>
+                  </a>
+                ) : service.slug === 'product-photography' ? (
+                  <Link to='/services/product-photography?mode=classic' className='service-card-cta'>
+                    <span>{service.cta}</span>
+                    <span className='service-cta-arrow' aria-hidden='true'>
+                      -&gt;
+                    </span>
+                  </Link>
+                ) : (
+                  <a href={service.href} className='service-card-cta'>
+                    <span>{service.cta}</span>
+                    <span className='service-cta-arrow' aria-hidden='true'>
+                      -&gt;
+                    </span>
+                  </a>
+                )}
               </motion.article>
             ))}
           </motion.div>

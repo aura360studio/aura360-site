@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import ShowcasePanoramaViewer from './ShowcasePanoramaViewer';
 import ShowcaseResponsiveVideo from './ShowcaseResponsiveVideo';
 import { showcaseCardReveal, showcaseHighlights, showcaseMediaBands } from './showcaseContent';
@@ -9,6 +10,7 @@ export default function ShowcaseFeatures() {
       {showcaseHighlights.map((item, index) => (
         <motion.article
           key={item.title}
+          id={item.id}
           className={`showcase-feature-section ${index % 2 === 1 ? 'reverse' : ''}`}
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -26,9 +28,9 @@ export default function ShowcaseFeatures() {
             <h2>{item.title}</h2>
             <p>{item.copy}</p>
             {index === 0 ? (
-              <a href='#contact' className='showcase-buy-cta showcase-feature-cta'>
+              <Link to='/services/product-photography?mode=showcase' className='showcase-buy-cta showcase-feature-cta'>
                 Explore Product Photography
-              </a>
+              </Link>
             ) : null}
             {index === 1 ? (
               <a href='#contact' className='showcase-buy-cta showcase-feature-cta'>
@@ -45,6 +47,7 @@ export default function ShowcaseFeatures() {
       {showcaseMediaBands.map((item, index) => (
         <motion.article
           key={item.title}
+          id={item.id}
           className={`showcase-media-panel ${index === 0 ? 'showcase-media-panel-demo' : ''}`}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
