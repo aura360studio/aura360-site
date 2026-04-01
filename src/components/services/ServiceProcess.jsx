@@ -12,6 +12,9 @@ export default function ServiceProcess({ title, intro, steps }) {
           <article key={step.title} className='service-process-card' role='listitem'>
             <div className='service-process-card-top'>
               <p className='service-process-index'>{String(index + 1).padStart(2, '0')}</p>
+              <span className='material-symbols-rounded service-process-icon' aria-hidden='true'>
+                {step.icon}
+              </span>
             </div>
             <div className='service-process-card-body'>
               <h3>{step.title}</h3>

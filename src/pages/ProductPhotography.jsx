@@ -29,36 +29,42 @@ const processSteps = [
   {
     title: 'Requirement Discussion',
     copy: 'We connect with you to understand the product, purpose, platform, and style requirements.',
+    icon: 'forum',
   },
   {
     title: 'Planning & Proposal',
     copy: 'We plan the shoot, backgrounds, props, lighting style, and share the quotation and timeline.',
+    icon: 'edit_note',
   },
   {
     title: 'Studio / Location Setup',
     copy: 'We set up the studio or prepare the location for the shoot.',
+    icon: 'tune',
   },
   {
     title: 'Photoshoot',
     copy: 'We capture the product using professional lighting and camera setup.',
+    icon: 'photo_camera',
   },
   {
     title: 'Editing & Review',
     copy: 'We edit, retouch, and enhance the images and share previews for review.',
+    icon: 'auto_fix_high',
   },
   {
     title: 'Final Delivery',
     copy: 'We deliver the final high-resolution images in required formats.',
+    icon: 'local_shipping',
   },
 ];
 
 const galleryImages = [
+  { src: galleryToy1, alt: 'Toy product photography frame one', caption: 'Toy Series 01', ratioClass: 'is-portrait-medium' },
   { src: galleryCreative, alt: 'Creative product photography concept frame', caption: 'Creative Concept', ratioClass: 'is-portrait-wide' },
   { src: galleryToy3, alt: 'Toy product photography frame three', caption: 'Toy Series 03', ratioClass: 'is-tall' },
   { src: galleryDrinkJuce, alt: 'Juice drink product photography frame', caption: 'Juice Pour', ratioClass: 'is-portrait-xl' },
   { src: galleryMyBag, alt: 'Bag product photography frame', caption: 'Bag Feature', ratioClass: 'is-portrait-wide' },
   { src: galleryAuroraVodka, alt: 'Aurora vodka product photography frame', caption: 'Aurora Vodka', ratioClass: 'is-tall' },
-  { src: galleryToy1, alt: 'Toy product photography frame one', caption: 'Toy Series 01', ratioClass: 'is-portrait-medium' },
   { src: galleryJecket, alt: 'Jacket product photography frame', caption: 'Jacket Detail', ratioClass: 'is-portrait-slim' },
   { src: galleryCreamAndHoney, alt: 'Cream and honey product photography frame', caption: 'Cream and Honey', ratioClass: 'is-portrait-medium' },
   { src: galleryToy5, alt: 'Toy product photography frame five', caption: 'Toy Series 05', ratioClass: 'is-portrait-xl' },
