@@ -33,9 +33,9 @@ export default function ShowcaseFeatures() {
               </Link>
             ) : null}
             {index === 1 ? (
-              <a href='#contact' className='showcase-buy-cta showcase-feature-cta'>
+              <Link to='/services/ai-powered-ads?mode=showcase' className='showcase-buy-cta showcase-feature-cta'>
                 Explore AI Advertising
-              </a>
+              </Link>
             ) : null}
           </motion.div>
           <div className='showcase-feature-image-wrap'>

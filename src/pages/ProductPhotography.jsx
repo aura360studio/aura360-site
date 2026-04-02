@@ -23,7 +23,7 @@ import galleryToy3 from '../assets/Product Photography/gallery/toy 3.webp';
 import galleryToy4 from '../assets/Product Photography/gallery/toy 4.webp';
 import galleryToy5 from '../assets/Product Photography/gallery/toy 5.webp';
 import productImage from '../assets/product.png';
-import productHeroImage from '../assets/PeoductPhoto.webp';
+import productHeroImage from '../assets/Product Photography/PP hero.webp';
 
 const processSteps = [
   {

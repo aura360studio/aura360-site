@@ -24,10 +24,8 @@ const showcaseMenuItems = [
   { id: 'contact', label: 'Contact', href: '#contact' },
 ];
 const serviceSequence = [
-  { slug: 'ai-powered-ads', label: 'AI-Powered Ads', anchor: '#ai-powered-ads' },
+  { slug: 'ai-powered-ads', label: 'Ads, now AI-powered', path: '/services/ai-powered-ads' },
   { slug: 'product-photography', label: 'Product Photography', path: '/services/product-photography' },
-  { slug: '360-photography', label: '360 Photography', anchor: '#360-photography' },
-  { slug: 'visual-experience', label: 'Visual Experience', anchor: '#visual-experience' },
 ];
 
 export default function Header() {
@@ -40,10 +38,20 @@ export default function Header() {
   const isShowcaseHeaderPage = isShowcasePage || isServicePage;
   const sourceMode = searchParams.get('mode') === 'classic' ? 'classic' : 'showcase';
   const currentServiceSlug = location.pathname.replace('/services/', '') || 'product-photography';
-  const servicePageLabel = location.pathname === '/services/product-photography' ? 'Product Photography' : 'Service Page';
+  const servicePageLabel =
+    location.pathname === '/services/product-photography'
+      ? 'Product Photography'
+      : location.pathname === '/services/ai-powered-ads'
+      ? 'Ads, now AI-powered'
+      : 'Service Page';
   const currentServiceIndex = serviceSequence.findIndex((item) => item.slug === currentServiceSlug);
-  const previousService = currentServiceIndex > 0 ? serviceSequence[currentServiceIndex - 1] : null;
-  const nextService = currentServiceIndex >= 0 && currentServiceIndex < serviceSequence.length - 1 ? serviceSequence[currentServiceIndex + 1] : null;
+  const safeServiceIndex = currentServiceIndex >= 0 ? currentServiceIndex : 0;
+  const previousService = serviceSequence.length
+    ? serviceSequence[(safeServiceIndex - 1 + serviceSequence.length) % serviceSequence.length]
+    : null;
+  const nextService = serviceSequence.length
+    ? serviceSequence[(safeServiceIndex + 1) % serviceSequence.length]
+    : null;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState('home');
   const [isShowcaseHeaderHidden, setIsShowcaseHeaderHidden] = useState(false);
@@ -117,6 +125,7 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, [isMenuOpen, isShowcaseHeaderPage]);
 
+
   const handleNavClick = () => {
     setIsMenuOpen(false);
   };
@@ -135,6 +144,7 @@ export default function Header() {
     event.preventDefault();
     navigate(buildModeHref(sourceMode, '#home'));
   };
+
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
@@ -239,7 +249,7 @@ export default function Header() {
                   {isMenuOpen ? (
                     <span className='showcase-close-mark' aria-hidden='true'>
                       <span />
-                      <span />
+                      <span />  
                     </span>
                   ) : (
                     <span className='showcase-menu-glyph' aria-hidden='true'>

@@ -11,6 +11,7 @@ import {
   ShowcasePage,
 } from './components';
 import ProductPhotography from './pages/ProductPhotography';
+import AdsNowAIPowered from './pages/AdsNowAIPowered';
 import { initSmoothScroll } from './utils/smoothScroll';
 
 function HashScrollHandler() {
@@ -93,6 +94,15 @@ function ProductPhotographyLayout() {
   );
 }
 
+function AdsNowAIPoweredLayout() {
+  return (
+    <>
+      <Header />
+      <AdsNowAIPowered />
+    </>
+  );
+}
+
 export default function App() {
   return (
     <Routes>
@@ -100,6 +110,7 @@ export default function App() {
       <Route path='/labs' element={<LabsLayout />} />
       <Route path='/showcase' element={<ShowcaseLayout />} />
       <Route path='/services/product-photography' element={<ProductPhotographyLayout />} />
+      <Route path='/services/ai-powered-ads' element={<AdsNowAIPoweredLayout />} />
       <Route path='*' element={<Navigate to='/' replace />} />
     </Routes>
   );

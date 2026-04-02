@@ -37,7 +37,7 @@ const services = [
     text: `We combine data-driven insights with high-impact visuals to craft adaptive campaigns that reach the right audience at the right moment.
 Smarter targeting. Sharper execution. Measurable performance.`,
     cta: 'Explore AI Advertising',
-    href: '#contact',
+    href: '/services/ai-powered-ads',
     featured: true,
   },
   {
@@ -107,6 +107,13 @@ export default function Services() {
                   </a>
                 ) : service.slug === 'product-photography' ? (
                   <Link to='/services/product-photography?mode=classic' className='service-card-cta'>
+                    <span>{service.cta}</span>
+                    <span className='service-cta-arrow' aria-hidden='true'>
+                      -&gt;
+                    </span>
+                  </Link>
+                ) : service.slug === 'ai-powered-ads' ? (
+                  <Link to='/services/ai-powered-ads?mode=classic' className='service-card-cta'>
                     <span>{service.cta}</span>
                     <span className='service-cta-arrow' aria-hidden='true'>
                       -&gt;
